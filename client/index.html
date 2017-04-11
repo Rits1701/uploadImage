@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title>Home</title>
+	</head>
+	<body ng-app="fileUpload">
+		<h1>Web Panel To upload Image</h1>
+        <form  ng-controller="MyCtrl as upload" name="upload.upload_form">
+                Upload Image
+            <input 
+                type="file" 
+                ngf-select 
+                ng-model="upload.file" 
+                name="file" 
+                resize-max-height="300"
+                resize-max-width="250"
+                ngf-pattern="'image/*'"
+                accept="image/*" 
+                ngf-max-size="1MB" 
+                />
+               <!--  1MB = 1024 * 1024 -->
+                <br/>
+                <br/>
+            Image thumbnail <br/> <img style="width:100px;" ng-show="!!up.file" ngf-thumbnail="upload.file"/>
+            <i ng-show="upload.upload_form.file.$error.required">*required</i><br>
+            <i ng-show="upload.upload_form.file.$error.maxSize">File too large 
+            {{upload.file.size / 1000000|number:1}}MB: max 20M</i>
+            <br/>
+            <button type="submit" ng-click="upload.submit()">submit</button>
+            <p>{{upload.progress}}</p>
+        </form>
+	</body>
+	<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+	<script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+	<script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</html>
